@@ -7,7 +7,7 @@
             <h2>Görev Oluşturuldu</h2>
         </div>
         <div class="card-body">
-            <form action="{{ route('panel.addTask') }}" method="POST">
+            <form action="{{ route('panel.addTask')  }}" method="post" >
                 @csrf
                 <div>
                     <label for="defaultFormControlInput" class="form-label">Başlık: </label>
@@ -15,15 +15,17 @@
                 </div>
                 <div>
                     <label for="defaultFormControlInput" class="form-label">İçerik: </label>
-                    <input type="text" class="form-control" name="content">
+                    <input type="text" class="form-control" name="content"  required>
                 </div>
                 <div>
                     <label for="defaultFormControlInput" class="form-label">Durum: </label>
-                    <select name="status" id="status" class="form-control">
-                        <option value="yapilmadi">Yapılmadı</option>
-                        <option value="yapiliyor">Yapılıyor</option>
-                        <option value="yapildi">Yapıldı</option>
-                        <option value="iptal">İptal Oldu</option>
+                    <select name="status" id="" class="form-control">
+
+                        <option  selected value="" disabled >Lütfen Seçim yapınız</option>
+                        <option value="0" name="">Yapılmadı</option>
+                        <option value="1"   name="">Yapılıyor</option>
+                        <option value="2" name="">Yapıldı</option>
+                        <option value="3" name="">İptal Oldu</option>
                     </select>
                 </div>
                 <div>

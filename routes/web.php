@@ -10,5 +10,7 @@ Route::get("/test",function (){
     return view("panel.layout.app");
 });
 
-Route::get("panel.tasks.create",[TaskController::class,"createPage"])->name("panel.CreateTaskPage");
-Route::post("panel.tasks.add",[TaskController::class, "addTask"])->name("panel.addTask");
+Route::get("panel/tasks/create",[TaskController::class,"createPage"])->name("panel/CreateTaskPage");
+Route::post("/panel/tasks/add",[TaskController::class,"addTask"])->name("panel.addTask");
+
+
