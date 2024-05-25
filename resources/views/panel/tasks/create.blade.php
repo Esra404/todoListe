@@ -4,7 +4,7 @@
 
     <div class="card p-3">
         <div class="card-header">
-            <h2>Görev Oluşturuldu</h2>
+            <h2>Görev Oluştur</h2>
         </div>
         <div class="card-body">
             <form action="{{ route('panel.addTask')  }}" method="post" >
@@ -18,6 +18,14 @@
                     <input type="text" class="form-control" name="content"  required>
                 </div>
                 <div>
+                    <label for="defaultFormControlInput" class="form-label">Kategori </label>
+                    <select name="category" id="" class="form-control">
+
+                        <option  selected value="" disabled >Lütfen Seçim yapınız</option>
+                   @foreach($categories as $c)
+                            <option value="{{$c->id}}">{{$c->name}}</option>
+                   @endforeach
+                    </select>
                     <label for="defaultFormControlInput" class="form-label">Durum: </label>
                     <select name="status" id="" class="form-control">
 

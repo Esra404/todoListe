@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Tests\Feature\AuthenticationTest;
 
 class TaskController extends Controller
 {
 public function createPage()
 {
-    return view("panel/tasks/create");
+    $categories=Category::where("user_id",Auth::user()->id)->get();
+    return view("panel/tasks/create",compact("categories"));
 }
 public function addTask(Request $request)
 {
@@ -27,18 +31,33 @@ public function addTask(Request $request)
 
 
     $task = new Task();
-    $task->categori_id=1;
+    $task->categori_id= $request->category_id;
     $task->title=$request->title;
     $task->content=$request->content;
     $task->status=$request->status;
     $task->deadline=$request->deadline;
     $task->save();
-    return "başarılı";
+
+    return redirect()->route("panel.indexTask")->with(["succes","görev başarıyla oluşturuldu"]);
 
    // dd($request->all());
     //dd($task);
 
    // DB::table("tasks")->insert();
-}    //
+}
+
+
+public function indexPage()
+{
+//$tasks=Task::get();
+$user=Auth::user();
+
+$tasks=$user->getTask;
+
+
+//dd($tasks->getCategory->getUser);
+
+return view("panel.tasks.index",compact("tasks"));
+}
 }
 

@@ -10,9 +10,9 @@
                 </div>
 
             @endif
-                @if(session('error'))
+                @if(session('errors'))
                     <div class="alert alert-danger alert-dismissible" role="alert">
-                        {{session("error")}}
+                        {{session("errors")}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
                     </div>
 
@@ -33,9 +33,11 @@
 
 
                         <th>Kategori Adı</th>
+                        <th>Kullanıcı</th>
                         <th>Durum</th>
                         <th>Oluşturulma Tarihi</th>
                         <th>İşlemler</th>
+                        <td></td>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -45,6 +47,9 @@
                         <tr>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$k->name}}</strong></td>
                             <td>
+                                {{$k->getUser->name}}
+                            </td>
+                            <td>
                                 @if($k->is_active==1)
                                     aktif
                                 @else
@@ -52,12 +57,12 @@
                                 @endif
                             </td>
                             <td>
-                                {{$k->created_at}}
+                                {{$k->created_at->diffForHumans()}}
                             </td>
                             <td>
                                 <a href="{{route("panel.categoryUpdatePage",$k->id)}}" class="btn btn-info">Güncelle</a>
 
-                                <button>Sil</button>
+                                <a href="{{route("panel.categoryDelete",$k->id)}}" class="btn btn-danger">Sil</a>
                             </td>
 
                         </tr>

@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('categories_tables', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
             $table->string("name");
             $table->boolean("is_active")->default(1)->comment("1- active 2-isactive");
             $table->softDeletes();
             $table->timestamps();
+            //foreign key hiç bir zaman integer olmaz
+            $table->foreign("user_id")->on("users")->references("id");
 
         });
     }
